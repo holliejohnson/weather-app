@@ -1,0 +1,74 @@
+body {
+  padding: 60px;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h5,
+p {
+  color: #14274e;
+}
+
+h1 {
+  margin: 30px 0px 0px 0px;
+  text-align: center;
+  font-size: 80px;
+}
+h2 {
+  margin: 40px 0px 0px 0px;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+h5 {
+  padding: 10px 0px;
+  text-align: center;
+}
+
+button {
+  margin: 10px;
+}
+.details {
+  padding: 25px 0 0 0;
+  text-align: right;
+}
+.looking-ahead {
+  padding: 20px 0px;
+  font-size: 18px;
+}
+
+.message {
+  text-align: center;
+}
+.emoji,
+.temp {
+  text-align: center;
+}
+
+.emoji {
+  font-size: 30px;
+}
+.card-title {
+  font-size: 8px;
+}
+
+.app {
+  padding: 25px;
+  margin: 25px auto;
+  max-width: 600px;
+  box-shadow: 4px 4px 4px rgba(1, 1, 1, 0.2);
+  background: #f1f6f9;
+  border-radius: 6px;
+}
+.search-form {
+  margin: 40px 70px 0px 70px;
+}
+
+.my-location {
+  margin: 0 auto;
+  display: block;
+}
