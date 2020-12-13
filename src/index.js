@@ -30,10 +30,22 @@ function formatDate(now) {
   } ${now.getDate()}, ${now.getFullYear()} ${now.toLocaleTimeString()}`;
 }
 
-function displayTemperature(response) {
+function displayInfo(response) {
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
-  temperature.innerHTML = `${temp}&deg;<br>  🌪`;
+  temperature.innerHTML = `${temp}&deg;`;
+
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = response.data.main.humidity;
+
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = response.data.wind.speed;
+
+  let sunrise = document.querySelector("#sunrise");
+  sunrise.innerHTML = `${new Date((response.data.sys.sunrise) * 1000).getHours()}:${new Date((response.data.sys.sunrise) * 1000).getMinutes()}`;
+
+  let sunset = document.querySelector("#sunset");
+  sunset.innerHTML = `${new Date((response.data.sys.sunset) * 1000).getHours()}:${new Date((response.data.sys.sunset) * 1000).getMinutes()}`;
 }
 
 function handleSearch(event) {
@@ -42,7 +54,7 @@ function handleSearch(event) {
   let cityName = document.querySelector("#city-search-input").value;
   let endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
   cityDisplay.innerHTML = cityName;
-  axios.get(endpoint).then(displayTemperature);
+  axios.get(endpoint).then(displayInfo);
 }
 
 function processLocation(response) {
@@ -50,7 +62,18 @@ function processLocation(response) {
   let temperature = document.querySelector("#temp");
   let myCityName = response.data.name;
   city.innerHTML = myCityName;
-  temperature.innerHTML = `${temp}&deg;<br>  🌪`;
+  temperature.innerHTML = `${temp}&deg;`;
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = response.data.main.humidity;
+
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = response.data.wind.speed;
+
+  let sunrise = document.querySelector("#sunrise");
+  sunrise.innerHTML = `${new Date((response.data.sys.sunrise) * 1000).getHours()}:${new Date((response.data.sys.sunrise) * 1000).getMinutes()}`;
+
+  let sunset = document.querySelector("#sunset");
+  sunset.innerHTML = `${new Date((response.data.sys.sunset) * 1000).getHours()}:${new Date((response.data.sys.sunset) * 1000).getMinutes()}`;
 }
 
 function getLocation(position) {
@@ -78,23 +101,23 @@ let cityDisplay = document.querySelector("#city");
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", handleSearch);
 
-/*
+
 function toggleFarenheight(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temp");
-  temperature.innerHTML = "68&deg;  🌪";
+  temperature.innerHTML = "68&deg;";
 }
 
 function toggleCelcius(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temp");
-  temperature.innerHTML = "20&deg;  🌪";
-}*/
+  temperature.innerHTML = "20&deg;";
+}
 
-/*
+
 let fToggle = document.querySelector("#farenheight");
 fToggle.addEventListener("click", toggleFarenheight);
 
 let cToggle = document.querySelector("#celcius");
 cToggle.addEventListener("click", toggleCelcius);
-*/
+
