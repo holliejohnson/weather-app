@@ -30,10 +30,12 @@ function formatDate(now) {
   } ${now.getDate()}, ${now.getFullYear()} ${now.toLocaleTimeString()}`;
 }
 
+let currentUnit = "c";
 function displayInfo(response) {
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
-  temperature.innerHTML = `${temp}&deg;`;
+  currentUnit = "c";
+  temperature.innerHTML = temp;
 
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = response.data.main.humidity;
@@ -46,6 +48,13 @@ function displayInfo(response) {
 
   let sunset = document.querySelector("#sunset");
   sunset.innerHTML = `${new Date((response.data.sys.sunset) * 1000).getHours()}:${new Date((response.data.sys.sunset) * 1000).getMinutes()}`;
+
+  let icon = document.querySelector("#icon");
+  icon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  icon.setAttribute("alt", response.data.weather[0].description);
+
+  let message = document.querySelector("#message");
+  message.innerHTML = response.data.weather[0].main;
 }
 
 function handleSearch(event) {
@@ -62,7 +71,8 @@ function processLocation(response) {
   let temperature = document.querySelector("#temp");
   let myCityName = response.data.name;
   city.innerHTML = myCityName;
-  temperature.innerHTML = `${temp}&deg;`;
+  temperature.innerHTML = temp;
+  currentUnit = "c";
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = response.data.main.humidity;
 
@@ -74,6 +84,14 @@ function processLocation(response) {
 
   let sunset = document.querySelector("#sunset");
   sunset.innerHTML = `${new Date((response.data.sys.sunset) * 1000).getHours()}:${new Date((response.data.sys.sunset) * 1000).getMinutes()}`;
+
+  let icon = document.querySelector("#icon");
+  icon.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  icon.setAttribute("alt", response.data.weather[0].description);
+
+
+  let message = document.querySelector("#message");
+  message.innerHTML = response.data.weather[0].main;
 }
 
 function getLocation(position) {
@@ -105,13 +123,19 @@ citySearchForm.addEventListener("submit", handleSearch);
 function toggleFarenheight(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temp");
-  temperature.innerHTML = "68&deg;";
+  if(currentUnit === "c"){
+    temperature.innerHTML = Math.round((temperature.innerHTML *(9/5)) + 32);
+    currentUnit = "f";
+  }
 }
 
 function toggleCelcius(event) {
   event.preventDefault();
   let temperature = document.querySelector("#temp");
-  temperature.innerHTML = "20&deg;";
+  if(currentUnit === "f"){
+    temperature.innerHTML = Math.round((temperature.innerHTML -32) *(5/9));
+    currentUnit = "c";
+  }
 }
 
 

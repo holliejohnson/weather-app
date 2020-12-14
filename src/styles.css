@@ -40,8 +40,11 @@ button {
   padding: 20px 0px;
   font-size: 18px;
 }
-
-.message {
+#icon {
+  display: block;
+  margin: 0 auto;
+}
+#message {
   text-align: center;
 }
 .emoji,
